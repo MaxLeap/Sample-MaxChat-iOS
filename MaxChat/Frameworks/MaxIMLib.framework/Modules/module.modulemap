@@ -1,0 +1,6 @@
+framework module MaxIMLib {
+  umbrella header "MaxIMLib.h"
+
+  export *
+  module * { export * }
+}

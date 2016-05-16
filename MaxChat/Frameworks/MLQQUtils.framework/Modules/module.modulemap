@@ -1,0 +1,6 @@
+framework module MLQQUtils {
+  umbrella header "MLQQUtils.h"
+
+  export *
+  module * { export * }
+}
