@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MCContactsViewController">
+            <connections>
+                <outlet property="myFriendsTableView" destination="LbW-hn-Zj9" id="uUN-CE-5Bq"/>
+                <outlet property="myGroupsTableView" destination="LkT-Ie-IMJ" id="QKh-FN-KZR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="LbW-hn-Zj9">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <inset key="separatorInset" minX="55" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="GaT-Lf-RPO"/>
+                        <outlet property="delegate" destination="-1" id="2pf-xK-d6u"/>
+                    </connections>
+                </tableView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="LkT-Ie-IMJ">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <inset key="separatorInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Eea-RB-40p"/>
+                        <outlet property="delegate" destination="-1" id="t8i-sf-3x1"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="LbW-hn-Zj9" secondAttribute="trailing" id="9gW-Th-hSH"/>
+                <constraint firstAttribute="bottom" secondItem="LkT-Ie-IMJ" secondAttribute="bottom" id="DL0-2f-M4S"/>
+                <constraint firstItem="LkT-Ie-IMJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Gpx-A7-vHf"/>
+                <constraint firstItem="LkT-Ie-IMJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Hch-gv-6Zm"/>
+                <constraint firstItem="LbW-hn-Zj9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SkD-kl-56O"/>
+                <constraint firstAttribute="trailing" secondItem="LkT-Ie-IMJ" secondAttribute="trailing" id="TES-7N-4Ob"/>
+                <constraint firstItem="LbW-hn-Zj9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ULZ-qI-fAF"/>
+                <constraint firstAttribute="bottom" secondItem="LbW-hn-Zj9" secondAttribute="bottom" id="pom-U7-6k0"/>
+            </constraints>
+            <point key="canvasLocation" x="371" y="215"/>
+        </view>
+    </objects>
+</document>

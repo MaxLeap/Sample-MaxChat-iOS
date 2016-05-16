@@ -1,0 +1,6 @@
+framework module MaxSocial {
+  umbrella header "MaxSocial.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,10 @@
+framework module SDWebImage {
+  umbrella header "SDWebImage.h"
+
+  export *
+  module * { export * }
+  explicit module BFAppLinkResolving {
+      header "SDWebImage.h"
+      link "SDWebImage"
+      export *
+  }}
