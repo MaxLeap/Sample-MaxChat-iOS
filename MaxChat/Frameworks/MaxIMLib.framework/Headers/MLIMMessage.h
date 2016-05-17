@@ -35,9 +35,10 @@ typedef NS_ENUM(int, MLIMMessageTargetType) {
     MLIMMessageTargetTypeSystem = -2,
     MLIMMessageTargetTypeNone = -1,
     MLIMMessageTargetTypeFriend = 0,
-    MLIMMessageTargetTypeGroup,
-    MLIMMessageTargetTypeRoom,
-    MLIMMessageTargetTypeSingleUser = MLIMMessageTargetTypeFriend
+    MLIMMessageTargetTypeGroup = 1,
+    MLIMMessageTargetTypeRoom = 2,
+    MLIMMessageTargetTypePassenger = 3,
+    MLIMMessageTargetTypeSingleUser = MLIMMessageTargetTypePassenger
 };
 
 NS_ASSUME_NONNULL_BEGIN
@@ -61,6 +62,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  The target roomId.
  */
 @property (nonatomic, strong, nullable) NSString *roomId;
+
+/**
+ *  The target passenger's id.
+ */
+@property (nonatomic, strong, nullable) NSString *passengerId;
 
 /**
  *  Target Type.

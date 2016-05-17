@@ -9,6 +9,8 @@
 #import "MaxChatIMClient.h"
 #import "MCMessagesViewController.h"
 #import "MCMessagesModelData.h"
+#import "Constants.h"
+@import MaxLeap;
 
 
 @implementation MLIMFriendInfo(isEqual)
@@ -59,8 +61,8 @@
         MLIMClientConfiguration *configuration = [MLIMClientConfiguration defaultConfiguration];
         
         // 必选配置
-        configuration.appId = MAXLEAP_APPID;
-        configuration.clientKey = MAXLEAP_CLIENTKEY;
+        configuration.appId = [MaxLeap applicationId];
+        configuration.clientKey = [MaxLeap clientKey];
         
         // 断线重连设置
         configuration.autoReconnect = YES;
@@ -77,6 +79,11 @@
     }
     
     return self;
+}
+
+#pragma mark - dealloc Method
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)maxLeapDidLogin:(id)sender {

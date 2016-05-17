@@ -8,6 +8,9 @@
 
 #import "MCContactsViewController.h"
 #import "MaxChatIMClient.h"
+#import "Constants.h"
+@import SDWebImage;
+@import MaxLeap;
 
 
 @interface MCContactsViewController ()
@@ -23,6 +26,10 @@
 @end
 
 @implementation MCContactsViewController
+#pragma mark - dealloc Method
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

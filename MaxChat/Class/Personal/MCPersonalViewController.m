@@ -10,6 +10,12 @@
 #import "MCLoginViewController.h"
 #import "MCUserIconCell.h"
 #import "MCSignViewController.h"
+#import "Constants.h"
+@import SVProgressHUD;
+@import SDWebImage;
+@import MaxLeap;
+
+
 
 @interface MCPersonalViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 

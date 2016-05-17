@@ -11,6 +11,7 @@
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 #import "UIImage+JSQMessages.h"
 #import "MCMessagesModelData.h"
+@import MediaPlayer;
 
 @interface MediaContainerView: UIView
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@import MaxIMLib;
 
 @interface MCContactCell : UITableViewCell
 - (void)configWithFriend:(MLIMFriendInfo *)aFriend;

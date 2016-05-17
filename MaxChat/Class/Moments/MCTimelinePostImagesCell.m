@@ -9,6 +9,9 @@
 #import "MCTimelinePostImagesCell.h"
 #import "MCPhotoBroswer.h"
 #import "MCTimelinePostImagesCollectionViewCell.h"
+#import "Constants.h"
+@import SDWebImage;
+@import MaxSocial;
 
 @interface MCTimelinePostImagesCell () <UICollectionViewDelegate, UICollectionViewDataSource,
 MCPhotoBroswerDataSource,

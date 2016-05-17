@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@import TTTAttributedLabel;
+@import MaxSocial;
 
 
 @interface MCTimelinePostCommentCell : UITableViewCell

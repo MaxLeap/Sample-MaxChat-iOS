@@ -1,6 +1,12 @@
 #import "MCVideoMediaItem.h"
 #import "MCMessagesViewController.h"
 #import "MaxChatIMClient.h"
+#import "Constants.h"
+#import "UIImage+Additions.h"
+@import MobileCoreServices;
+
+@import SVProgressHUD;
+@import MaxLeap;
 
 #define TIMECAPTIONSPACE 2
 
@@ -168,7 +174,6 @@
                                  }];
     } else {
         UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
-        ILSLogImage(@"SelectImage", image);
         [self dismissViewControllerAnimated:YES
                                  completion:^{
                                      UIImage *resizedImage;

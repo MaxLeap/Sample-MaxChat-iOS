@@ -3,6 +3,10 @@
 #import "MCVideoMediaItem.h"
 #import "MCAudioMediaItem.h"
 #import "MaxChatIMClient.h"
+#import "Constants.h"
+@import SDWebImage;
+@import MaxLeap;
+
 
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
@@ -354,7 +358,6 @@
 + (JSQMessage *)createPhotoMediaMessage
 {
     UIImage *image = arc4random()%2 ? [UIImage imageNamed:@"goldengate"] : [UIImage imageNamed:@"bg_414"];
-    ILSLogImage(@"send image", image);
     
     JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:image];
     JSQMessage *photoMessage = [JSQMessage messageWithSenderId:IMCurrentUserID

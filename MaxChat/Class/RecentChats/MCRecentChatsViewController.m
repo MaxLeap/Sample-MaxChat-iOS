@@ -8,12 +8,21 @@
 
 #import "MCRecentChatsViewController.h"
 #import "MaxChatIMClient.h"
+#import "Constants.h"
+@import SDWebImage;
+@import MaxLeap;
+
 
 @interface MCRecentChatsViewController ()
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @end
 
 @implementation MCRecentChatsViewController
+
+#pragma mark - dealloc Method
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,7 +36,6 @@
 
 - (void)maxLeapDidLogout:(id)sender {
     [self.tableView reloadData];
-    self.navigationController.tabBarItem.badgeValue = nil;
 }
 
 - (void)updateChats:(id)sender {

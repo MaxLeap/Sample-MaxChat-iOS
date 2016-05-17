@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@import MaxSocial;
 
 @interface MCTimelineTextTableViewCell : UITableViewCell
 

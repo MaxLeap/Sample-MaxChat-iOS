@@ -7,6 +7,8 @@
 //
 
 #import "MCTimelinePostLikesCell.h"
+#import "Constants.h"
+@import TTTAttributedLabel;
 
 
 @interface MCTimelinePostLikesCell () <TTTAttributedLabelDelegate>

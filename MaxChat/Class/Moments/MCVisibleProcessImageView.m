@@ -7,6 +7,8 @@
 //
 
 #import "MCVisibleProcessImageView.h"
+#import "Constants.h"
+@import SDWebImage;
 
 @interface MCVisibleProcessImageView ()
 @property (nonatomic, strong) MFLMProgressIndicator * progressIndicator;

@@ -7,6 +7,7 @@
 //
 
 #import "UIImage+KTCategory.h"
+@import UIKit;
 
 @implementation UIImage (KTCategory)
 

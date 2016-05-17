@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@import MaxSocial;
 
 #define kMaxNumberOfImagesPerRow   3
 #define kCollectionViewRightMargin 60

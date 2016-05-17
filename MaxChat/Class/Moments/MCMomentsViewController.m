@@ -9,12 +9,21 @@
 #import "MCMomentsViewController.h"
 #import "MCTimelinePostsListViewController.h"
 #import "MCCreateNewPostViewController.h"
+#import "Constants.h"
+@import MaxSocial;
+@import MaxLeap;
 
-@interface MCMomentsViewController () 
+
+@interface MCMomentsViewController ()
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @end
 
 @implementation MCMomentsViewController
+
+#pragma mark - dealloc Method
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

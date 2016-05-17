@@ -16,6 +16,11 @@
 #import "MCTimelinePostCommentCell.h"
 #import "MCTextViewInternal.h"
 #import "UIView+AutoLayout.h"
+#import "Constants.h"
+@import SVProgressHUD;
+@import MJRefresh;
+@import MaxLeap;
+
 
 @interface MCTimelinePostsListViewController () <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -50,7 +55,10 @@
 
 @implementation MCTimelinePostsListViewController
 
-#pragma mark - init Method
+#pragma mark - dealloc Method
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 #pragma mark- View Life Cycle
 
@@ -206,7 +214,7 @@
         }
         
         if (completion) {
-            completion(remoteShuoshuos, YES, nil);
+            completion(remoteShuoshuos, YES, error);
         }
     };
     

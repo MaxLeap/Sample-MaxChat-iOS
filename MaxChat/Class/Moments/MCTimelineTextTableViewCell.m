@@ -7,6 +7,11 @@
 //
 
 #import "MCTimelineTextTableViewCell.h"
+#import "Constants.h"
+@import TTTAttributedLabel;
+@import SDWebImage;
+
+
 
 #define kUserNameLinkTag   @"timeline_Username"
 

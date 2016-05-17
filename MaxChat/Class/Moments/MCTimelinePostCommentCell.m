@@ -7,6 +7,8 @@
 //
 
 #import "MCTimelinePostCommentCell.h"
+#import "Constants.h"
+@import MaxSocial;
 
 #define kTappedUsernameTag @"tappedUser"
 

@@ -7,6 +7,9 @@
 //
 
 #import "MCSignViewController.h"
+#import "Constants.h"
+@import SVProgressHUD;
+@import MaxLeap;
 
 
 
@@ -20,6 +23,11 @@
 @end
 
 @implementation MCSignViewController
+
+#pragma mark - dealloc Method
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -153,12 +161,6 @@
 
 
 
-#pragma mark- Delegate，DataSource, Callback Method
-
-#pragma mark- Override Parent Method
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 #pragma mark- Private Method
 

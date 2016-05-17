@@ -10,6 +10,12 @@
 #import <AssetsLibrary/ALAsset.h>
 #import "MCPhotoBroswer.h"
 #import "MCLotteryCommentImageCell.h"
+#import "UIImage+Additions.h"
+
+#import "Constants.h"
+@import SVProgressHUD;
+@import MaxSocial;
+@import MaxLeap;
 
 NSString * const newPostPlaceholderText = @"说点什么吧...";
 
@@ -47,7 +53,10 @@ NSString * const newPostPlaceholderText = @"说点什么吧...";
 @end
 
 @implementation MCCreateNewPostViewController
-#pragma mark - init Method
+#pragma mark - dealloc Method
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 #pragma mark- View Life Cycle
 

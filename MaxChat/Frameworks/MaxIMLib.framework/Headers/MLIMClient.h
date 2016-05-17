@@ -9,6 +9,7 @@
 MLIMFriendInfo,
 MLIMGroup,
 MLIMRoom,
+MLIMPassenger,
 MLIMMessage,
 MLIMClientConfiguration;
 
@@ -56,6 +57,11 @@ typedef NS_ENUM(int, MLIMClientStatus) {
  *  The current logged in user of this client.
  */
 @property (nullable, nonatomic, readonly) MLIMUser *currentUser;
+
+/**
+ *  The current logged in passenger.
+ */
+@property (nullable, nonatomic, readonly) MLIMPassenger *currentPassenger;
 
 /**
  *  @name Creating Clients
@@ -124,6 +130,19 @@ typedef NS_ENUM(int, MLIMClientStatus) {
  *  @param block The block to execute after login completion. The block should have the following argument signature: (BOOL succeeded, NSError *error)
  */
 - (void)loginWithThirdPartyOAuth:(NSDictionary *)OAuth completion:(MLIMBooleanResultBlock)block;
+
+/**
+ *  Login a passenger. If the passenger is not exist, a new passenger will be created.
+ *
+ *  @discussion When creating a passenger, passenger.pid will be used if it exists, otherwise a new pid will be generated.
+ *   Setting custom fileds on the passenger is helpful to update the attributes of the passenger. But the values must be JSON Types.
+ *   eg: `passenger[field1] = @{@"a": @3};`
+ *   After login success, the passenger id canbe access using `passenger.pid`.
+ *
+ *  @param passenger The passenger object
+ *  @param block     The block to execute after login completion. It should have the following argument signature: (BOOL succeeded, NSError *error)
+ */
+- (void)loginPassenger:(MLIMPassenger *)passenger completion:(MLIMBooleanResultBlock)block;
 
 /**
  *  Disconnect the connection and logout.
@@ -382,6 +401,11 @@ typedef NS_ENUM(int, MLIMClientStatus) {
  *  Post when user login. The user object can be retrieved from `notification.userInfo[@"user"]`.
  */
 FOUNDATION_EXPORT NSString * const MLIMUserDidLoginNotification;
+
+/**
+ *  Post when a passenger login. The passenger object can be retrieved by calling `notification.userInfo[@"passenger"]`.
+ */
+FOUNDATION_EXPORT NSString * const MLIMPassengerDidLoginNotification;
 
 /**
  *  Post when receive a message from friend, group, room or yourself on other client. The message can be retrieved from `notification.userInfo[@"msg"]`.

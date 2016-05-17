@@ -12,16 +12,27 @@
 #import "MCPersonalViewController.h"
 #import "MCRecentChatsViewController.h"
 #import "MCMomentsViewController.h"
+#import "Constants.h"
 
 #import "WeiboSDK.h"
 #import "WXApi.h"
 #import "MaxChatIMClient.h"
 #import <TencentOpenAPI/TencentOAuth.h>
+#import "UIImage+Additions.h"
 
 @import MLWeChatUtils;
 @import MLWeiboUtils;
 @import MLQQUtils;
 
+#define MAXLEAP_APPID           @"572826d0a5ff7f00019a437d"
+#define MAXLEAP_CLIENTKEY       @"RjJGZXVCaWJSemFOaEFvYmJCUG41dw"
+
+// 注意要在info.plist中的URL Types中设置
+#define WECHAT_APPID            @"wx41b6f4bde79513c8"
+#define WECHAT_SECRET           @"d4624c36b6795d1d99dcf0547af5443d"
+#define WEIBO_APPKEY            @"2328234403"
+#define WEIBO_REDIRECTURL       @"https://api.weibo.com/oauth2/default.html"
+#define QQ_APPID                @"222222"
 
 
 @interface AppDelegate () <WXApiDelegate, WeiboSDKDelegate, TencentSessionDelegate>
@@ -113,7 +124,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [[ILSLogger sharedLogger]configureWithLogLevel:ILSLogLevelInfo domainWhiteList:nil bonjourName:LOGGER_TARGET];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     MCMomentsViewController *momentsViewContoller = [[MCMomentsViewController alloc]init];
@@ -161,10 +172,15 @@
     [self configureGlobalAppearance];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateChats:) name:kRecentChatsUpdatedNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(maxLeapDidLogout:) name:kMaxLeapDidLogoutNofitification object:nil];
     [MaxChatIMClient sharedInstance];
     
     return YES;
 }
+- (void)maxLeapDidLogout:(id)sender {
+    self.tabBarController.tabBar.items[2].badgeValue = nil;
+}
+
 
 - (void)updateChats:(id)sender {
     self.tabBarController.tabBar.items[2].badgeValue = [MaxChatIMClient sharedInstance].recentChats.count ? [NSString stringWithFormat:@"%ld", (long)[MaxChatIMClient sharedInstance].recentChats.count] :nil;

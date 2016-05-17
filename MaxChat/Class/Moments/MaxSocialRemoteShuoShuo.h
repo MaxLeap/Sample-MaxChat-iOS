@@ -6,7 +6,7 @@
 //  Copyright © 2016年 zhouhs. All rights reserved.
 //
 
-#import <MaxSocial/MaxSocial.h>
+@import MaxSocial;
 
 @interface MaxSocialRemoteShuoShuo : MaxSocialShuoShuo
 

@@ -7,6 +7,7 @@
 //
 
 #import "MCLotteryCommentImageCell.h"
+#import "Constants.h"
 
 
 @implementation MCLotteryCommentImageCell

@@ -4,6 +4,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "JSQMessages.h"
+@import MaxIMLib;
 
 
 

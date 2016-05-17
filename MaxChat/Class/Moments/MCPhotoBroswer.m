@@ -8,6 +8,7 @@
 
 #import "MCPhotoBroswer.h"
 #import "MCVisibleProcessImageView.h"
+#import "Constants.h"
 
 #define kAnimationDuration 0.25
 
