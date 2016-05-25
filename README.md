@@ -1,6 +1,10 @@
 # Sample-MaxChat-iOS
 
-使用步骤：
+### 环境准备
+
+请使用 7.3 及以上版本 Xcode
+
+###使用步骤：
 
 1、在maxleap.cn中创建app，记录appid和clientkey。
 
