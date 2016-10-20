@@ -15,7 +15,7 @@ FOUNDATION_EXPORT const unsigned char MaxLeapIMVersionString[];
 
 
 #import <MaxIMLib/MLIMUser.h>
-#import <MaxIMLib/MLIMFriendInfo.h>
+#import <MaxIMLib/MLIMRelationInfo.h>
 #import <MaxIMLib/MLIMGroup.h>
 #import <MaxIMLib/MLIMRoom.h>
 #import <MaxIMLib/MLIMClient.h>

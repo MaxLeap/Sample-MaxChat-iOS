@@ -29,6 +29,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
     self.postTimeLabel.textColor = kDefaultGrayColor;
     
     self.postTimeLabel.text = @"刚刚";

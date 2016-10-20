@@ -99,6 +99,8 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  Add a constraint to the query that requires a particular key's object to be equal to the provided object.
  
+ Object cannot be nil. If you try to match objects that do not exist key %@, use `-whereKeyDoesNotExist:` instead.
+ 
  @param key The key to be constrained.
  @param object The object that must be equalled.
  */
@@ -138,6 +140,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  Add a constraint to the query that requires a particular key's object to be not equal to the provided object.
+ 
+ Object cannot be nil. If you try to match objects that do exist key %@, use `-whereKeyExists:` instead.
  
  @param key The key to be constrained.
  @param object The object that must not be equalled.

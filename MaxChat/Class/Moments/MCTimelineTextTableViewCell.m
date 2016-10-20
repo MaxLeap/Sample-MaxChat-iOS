@@ -29,6 +29,7 @@
 @implementation MCTimelineTextTableViewCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     // Initialization code
     self.iconImageView.layer.cornerRadius = self.iconImageView.bounds.size.width / 2;
     self.iconImageView.layer.masksToBounds = YES;

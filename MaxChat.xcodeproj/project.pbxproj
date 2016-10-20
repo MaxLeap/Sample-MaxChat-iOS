@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9DDAAD641DB8C4A800BE2C20 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DDAAD591DB8C49F00BE2C20 /* SocketIO.framework */; };
+		9DDAAD651DB8C4A800BE2C20 /* SocketIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DDAAD591DB8C49F00BE2C20 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B20208A51CE3257B00215DC4 /* MaxSocialRemoteShuoShuo.m in Sources */ = {isa = PBXBuildFile; fileRef = B20208A41CE3257B00215DC4 /* MaxSocialRemoteShuoShuo.m */; };
 		B20886B61CE2C1DD00EE1573 /* MCCreateNewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B20886B41CE2C1DD00EE1573 /* MCCreateNewPostViewController.m */; };
 		B20886B71CE2C1DD00EE1573 /* MCCreateNewPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B20886B51CE2C1DD00EE1573 /* MCCreateNewPostViewController.xib */; };
@@ -22,8 +24,6 @@
 		B221D5151CD87B22002B95A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B221D5141CD87B22002B95A9 /* Assets.xcassets */; };
 		B221D5181CD87B22002B95A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B221D5161CD87B22002B95A9 /* LaunchScreen.storyboard */; };
 		B221D5681CD8998A002B95A9 /* MaxLeap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B221D5661CD89989002B95A9 /* MaxLeap.framework */; };
-		B221D56E1CD89A49002B95A9 /* SocketIOClientSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B221D56D1CD89A49002B95A9 /* SocketIOClientSwift.framework */; };
-		B221D56F1CD89A53002B95A9 /* SocketIOClientSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B221D56D1CD89A49002B95A9 /* SocketIOClientSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B221D5721CD8A136002B95A9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B221D5711CD8A136002B95A9 /* libsqlite3.tbd */; };
 		B221D5741CD8A13C002B95A9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B221D5731CD8A13C002B95A9 /* CoreTelephony.framework */; };
 		B221D5761CD8A150002B95A9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B221D5751CD8A150002B95A9 /* MobileCoreServices.framework */; };
@@ -142,6 +142,58 @@
 		B2D443DF1CDCA6AA00022D59 /* MCVideoMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D443DE1CDCA6AA00022D59 /* MCVideoMediaItem.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9DDAAD581DB8C49F00BE2C20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DDAAD4F1DB8C49E00BE2C20 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 572EF2191B51F16C00EEBB58;
+			remoteInfo = "SocketIO-iOS";
+		};
+		9DDAAD5A1DB8C49F00BE2C20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DDAAD4F1DB8C49E00BE2C20 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 572EF2241B51F16C00EEBB58;
+			remoteInfo = "SocketIO-iOSTests";
+		};
+		9DDAAD5C1DB8C49F00BE2C20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DDAAD4F1DB8C49E00BE2C20 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 572EF2381B51F18A00EEBB58;
+			remoteInfo = "SocketIO-Mac";
+		};
+		9DDAAD5E1DB8C49F00BE2C20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DDAAD4F1DB8C49E00BE2C20 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 572EF2421B51F18A00EEBB58;
+			remoteInfo = "SocketIO-MacTests";
+		};
+		9DDAAD601DB8C49F00BE2C20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DDAAD4F1DB8C49E00BE2C20 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57634A161BD9B46A00E19CD7;
+			remoteInfo = "SocketIO-tvOS";
+		};
+		9DDAAD621DB8C49F00BE2C20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DDAAD4F1DB8C49E00BE2C20 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57634A3B1BD9B46D00E19CD7;
+			remoteInfo = "SocketIO-tvOSTests";
+		};
+		9DDAAD661DB8C4A800BE2C20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DDAAD4F1DB8C49E00BE2C20 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 572EF2181B51F16C00EEBB58;
+			remoteInfo = "SocketIO-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		B221D56C1CD89A08002B95A9 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -149,7 +201,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B221D56F1CD89A53002B95A9 /* SocketIOClientSwift.framework in Embed Frameworks */,
+				9DDAAD651DB8C4A800BE2C20 /* SocketIO.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +209,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9DDAAD4F1DB8C49E00BE2C20 /* Socket.IO-Client-Swift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Socket.IO-Client-Swift.xcodeproj"; path = "socket.io-client-swift/Socket.IO-Client-Swift.xcodeproj"; sourceTree = "<group>"; };
+		9DDAAD681DB8CB8700BE2C20 /* MaxChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MaxChat.entitlements; sourceTree = "<group>"; };
 		B20208A31CE3257B00215DC4 /* MaxSocialRemoteShuoShuo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaxSocialRemoteShuoShuo.h; sourceTree = "<group>"; };
 		B20208A41CE3257B00215DC4 /* MaxSocialRemoteShuoShuo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaxSocialRemoteShuoShuo.m; sourceTree = "<group>"; };
 		B20886B31CE2C1DD00EE1573 /* MCCreateNewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCreateNewPostViewController.h; sourceTree = "<group>"; };
@@ -179,7 +233,6 @@
 		B221D5191CD87B22002B95A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B221D5651CD89989002B95A9 /* MaxIMLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MaxIMLib.framework; sourceTree = "<group>"; };
 		B221D5661CD89989002B95A9 /* MaxLeap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MaxLeap.framework; sourceTree = "<group>"; };
-		B221D56D1CD89A49002B95A9 /* SocketIOClientSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SocketIOClientSwift.framework; sourceTree = "<group>"; };
 		B221D5711CD8A136002B95A9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		B221D5731CD8A13C002B95A9 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		B221D5751CD8A150002B95A9 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -413,19 +466,32 @@
 				B221D5C71CD8B101002B95A9 /* TencentOpenAPI.framework in Frameworks */,
 				B221D5AB1CD8AEAA002B95A9 /* MLWeChatUtils.framework in Frameworks */,
 				B221D5741CD8A13C002B95A9 /* CoreTelephony.framework in Frameworks */,
+				9DDAAD641DB8C4A800BE2C20 /* SocketIO.framework in Frameworks */,
 				B221D5AA1CD8AEAA002B95A9 /* MLQQUtils.framework in Frameworks */,
 				B221D5721CD8A136002B95A9 /* libsqlite3.tbd in Frameworks */,
 				B2786ADC1CEAF2FB00AE26C1 /* MaxIMLib.framework in Frameworks */,
 				B221D5681CD8998A002B95A9 /* MaxLeap.framework in Frameworks */,
 				B20886CF1CE2DCFF00EE1573 /* MLHelpCenter.framework in Frameworks */,
 				B221D5AC1CD8AEAA002B95A9 /* MLWeiboUtils.framework in Frameworks */,
-				B221D56E1CD89A49002B95A9 /* SocketIOClientSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9DDAAD501DB8C49E00BE2C20 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9DDAAD591DB8C49F00BE2C20 /* SocketIO.framework */,
+				9DDAAD5B1DB8C49F00BE2C20 /* SocketIO-iOSTests.xctest */,
+				9DDAAD5D1DB8C49F00BE2C20 /* SocketIO.framework */,
+				9DDAAD5F1DB8C49F00BE2C20 /* SocketIO-MacTests.xctest */,
+				9DDAAD611DB8C49F00BE2C20 /* SocketIO.framework */,
+				9DDAAD631DB8C49F00BE2C20 /* SocketIO-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B20886C91CE2DCFF00EE1573 /* MLHelpCenter.embeddedframework */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +531,7 @@
 		B221D5041CD87B22002B95A9 /* MaxChat */ = {
 			isa = PBXGroup;
 			children = (
+				9DDAAD681DB8CB8700BE2C20 /* MaxChat.entitlements */,
 				B2ABCB3E1CDC321B00E3C2A1 /* Resource */,
 				B221D5861CD8A6E4002B95A9 /* Vendor */,
 				B221D51F1CD880EA002B95A9 /* Class */,
@@ -505,6 +572,7 @@
 		B221D5641CD89989002B95A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9DDAAD4F1DB8C49E00BE2C20 /* Socket.IO-Client-Swift.xcodeproj */,
 				B20886C91CE2DCFF00EE1573 /* MLHelpCenter.embeddedframework */,
 				B20886C71CE2DCF800EE1573 /* MaxSocial.framework */,
 				B26D56A31CE1C8590096D985 /* TTTAttributedLabel.framework */,
@@ -526,7 +594,6 @@
 				B221D5751CD8A150002B95A9 /* MobileCoreServices.framework */,
 				B221D5731CD8A13C002B95A9 /* CoreTelephony.framework */,
 				B221D5711CD8A136002B95A9 /* libsqlite3.tbd */,
-				B221D56D1CD89A49002B95A9 /* SocketIOClientSwift.framework */,
 				B221D5651CD89989002B95A9 /* MaxIMLib.framework */,
 				B221D5661CD89989002B95A9 /* MaxLeap.framework */,
 			);
@@ -917,11 +984,11 @@
 				B221D4FF1CD87B22002B95A9 /* Frameworks */,
 				B221D5001CD87B22002B95A9 /* Resources */,
 				B221D56C1CD89A08002B95A9 /* Embed Frameworks */,
-				B221D5701CD89A99002B95A9 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9DDAAD671DB8C4A800BE2C20 /* PBXTargetDependency */,
 			);
 			name = MaxChat;
 			productName = MaxChat;
@@ -934,11 +1001,16 @@
 		B221D4FA1CD87B22002B95A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = zhouhs;
 				TargetAttributes = {
 					B221D5011CD87B22002B95A9 = {
 						CreatedOnToolsVersion = 7.3;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -953,12 +1025,63 @@
 			mainGroup = B221D4F91CD87B22002B95A9;
 			productRefGroup = B221D5031CD87B22002B95A9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9DDAAD501DB8C49E00BE2C20 /* Products */;
+					ProjectRef = 9DDAAD4F1DB8C49E00BE2C20 /* Socket.IO-Client-Swift.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B221D5011CD87B22002B95A9 /* MaxChat */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9DDAAD591DB8C49F00BE2C20 /* SocketIO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketIO.framework;
+			remoteRef = 9DDAAD581DB8C49F00BE2C20 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9DDAAD5B1DB8C49F00BE2C20 /* SocketIO-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SocketIO-iOSTests.xctest";
+			remoteRef = 9DDAAD5A1DB8C49F00BE2C20 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9DDAAD5D1DB8C49F00BE2C20 /* SocketIO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketIO.framework;
+			remoteRef = 9DDAAD5C1DB8C49F00BE2C20 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9DDAAD5F1DB8C49F00BE2C20 /* SocketIO-MacTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SocketIO-MacTests.xctest";
+			remoteRef = 9DDAAD5E1DB8C49F00BE2C20 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9DDAAD611DB8C49F00BE2C20 /* SocketIO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketIO.framework;
+			remoteRef = 9DDAAD601DB8C49F00BE2C20 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9DDAAD631DB8C49F00BE2C20 /* SocketIO-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SocketIO-tvOSTests.xctest";
+			remoteRef = 9DDAAD621DB8C49F00BE2C20 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B221D5001CD87B22002B95A9 /* Resources */ = {
@@ -1003,22 +1126,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B221D5701CD89A99002B95A9 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B221D4FE1CD87B22002B95A9 /* Sources */ = {
@@ -1106,6 +1213,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9DDAAD671DB8C4A800BE2C20 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SocketIO-iOS";
+			targetProxy = 9DDAAD661DB8C4A800BE2C20 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		B221D5161CD87B22002B95A9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1123,6 +1238,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1133,8 +1249,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1168,6 +1286,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1178,8 +1297,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1206,9 +1327,10 @@
 		B221D51D1CD87B22002B95A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MaxChat/MaxChat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1238,9 +1360,10 @@
 		B221D51E1CD87B22002B95A9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MaxChat/MaxChat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: App Channel Limited";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

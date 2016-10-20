@@ -24,6 +24,7 @@ MCPhotoBroswerDelegate>
 
 @implementation MCTimelinePostImagesCell
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.scrollsToTop = NO;

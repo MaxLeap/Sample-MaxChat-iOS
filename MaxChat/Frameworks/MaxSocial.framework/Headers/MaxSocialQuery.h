@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MaxSocialQuery : NSObject
 
 @property (nonatomic) int page;
-@property (nonatomic) int limit;
 
 @property (nonatomic) MLStatusQuerySort sort; // default is 1
 @property (nonatomic) BOOL ascending; // default is NO

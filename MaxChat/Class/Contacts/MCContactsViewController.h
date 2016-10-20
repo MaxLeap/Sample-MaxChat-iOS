@@ -10,7 +10,7 @@
 @import MaxIMLib;
 
 @interface MCContactCell : UITableViewCell
-- (void)configWithFriend:(MLIMFriendInfo *)aFriend;
+- (void)configWithFriend:(MLIMRelationInfo *)aFriend;
 @end
 
 @interface MCGroupCell : UITableViewCell

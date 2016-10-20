@@ -11,6 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ *  The `MLSmsCodeUtils` provides utility functions for using sms verification system.
+ */
 @interface MLSmsCodeUtils : NSObject
 
 /**

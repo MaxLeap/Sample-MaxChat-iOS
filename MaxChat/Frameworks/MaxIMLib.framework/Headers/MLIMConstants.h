@@ -8,6 +8,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// MaxLeap IM SDK Version
+#define MaxLeap_IM_VERSION @"1.3.1"
+
 FOUNDATION_EXPORT NSString * const MLIMErrorDomain;
 
 typedef NS_ENUM(NSInteger, MLIMErrorCode) {
@@ -19,7 +22,8 @@ typedef NS_ENUM(NSInteger, MLIMErrorCode) {
     kMLIMErrorParameterConflict = 5005,
     kMLIMErrorS3UploadFailed = 5006,
     kMLIMErrorImageProcessingError = 5007,
-    kMLIMErrorHitTheLimit = 5008
+    kMLIMErrorHitTheLimit = 5008,
+    kMLIMErrorInvalidQuery = 5018
 };
 
 typedef void (^MLIMBooleanResultBlock)(BOOL succeeded, NSError *__nullable error);

@@ -15,7 +15,7 @@
 
 @interface MCContactsViewController ()
 
-@property (nonatomic, strong) NSArray<MLIMFriendInfo*> *myFriends;
+@property (nonatomic, strong) NSArray<MLIMRelationInfo*> *myFriends;
 @property (nonatomic, strong) NSArray<MLIMGroup*> *myGroups;
 @property (nonatomic, strong) UIAlertController *alertWithText;
 
@@ -90,7 +90,7 @@
 }
 
 - (void)selectedIndexChanged:(UISegmentedControl *)sender {
-    NSLog(@"selectedIndexChanged %d", sender.selectedSegmentIndex);
+    NSLog(@"selectedIndexChanged %ld", (long)sender.selectedSegmentIndex);
     switch (sender.selectedSegmentIndex) {
         case 0:
             self.myFriendsTableView.hidden = NO;
@@ -145,7 +145,7 @@
 }
 
 #pragma mark - alert controllers
-- (void)showActionsForFriend:(MLIMFriendInfo *)aFriend {
+- (void)showActionsForFriend:(MLIMRelationInfo *)aFriend {
     UIAlertController *_actionController = [UIAlertController alertControllerWithTitle:nil
                                                                                message:nil
                                                                         preferredStyle:UIAlertControllerStyleActionSheet];
@@ -283,16 +283,16 @@
                                                                             }];
                                                             } else if ([type isEqualToString:@"addFriend"]) {
                                                                 [MLAnalytics trackEvent:@"添加好友" parameters:@{@"name":textInput}];
-                                                                [IMCurrentUser addFriendWithUser:textInput
-                                                                                      completion:^(NSDictionary * _Nonnull result, NSError * _Nullable error) {
-                                                                                          if (!error) {
-                                                                                              // 成功 ...
-                                                                                              NSLog(@"addFriend result %@", result);
-                                                                                              [self updateMyFriendsAndGroups];
-                                                                                          } else {
-                                                                                              NSLog(@"addFriend failed with error %@", error);
-                                                                                          }
-                                                                                      }];
+                                                                [IMCurrentUser addFriend:textInput
+                                                                              completion:^(NSDictionary * _Nonnull result, NSError * _Nullable error) {
+                                                                                  if (!error) {
+                                                                                      // 成功 ...
+                                                                                      NSLog(@"addFriend result %@", result);
+                                                                                      [self updateMyFriendsAndGroups];
+                                                                                  } else {
+                                                                                      NSLog(@"addFriend failed with error %@", error);
+                                                                                  }
+                                                                              }];
                                                             } else if ([type isEqualToString:@"addMember"]) {
                                                                 [MLAnalytics trackEvent:@"添加成员" parameters:@{@"name":textInput}];
                                                                 MLIMGroup *group = userInfo[@"group"];
@@ -355,7 +355,7 @@
         cell.textLabel.text = theGroup.name;
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell"];
-        MLIMFriendInfo *theFriend = self.myFriends[indexPath.row];
+        MLIMRelationInfo *theFriend = self.myFriends[indexPath.row];
         [(MCContactCell *)cell configWithFriend: theFriend];
     }
     
@@ -406,7 +406,7 @@
 @end
 
 @interface MCContactCell()
-@property (nonatomic, strong) MLIMFriendInfo *theFriend;
+@property (nonatomic, strong) MLIMRelationInfo *theFriend;
 @end
 
 @implementation MCContactCell
@@ -424,7 +424,7 @@
     [self.imageView sd_cancelCurrentImageLoad];
 }
 
-- (void)configWithFriend:(MLIMFriendInfo *)aFriend {
+- (void)configWithFriend:(MLIMRelationInfo *)aFriend {
     self.theFriend = aFriend;
     self.textLabel.text = aFriend.uid;
     

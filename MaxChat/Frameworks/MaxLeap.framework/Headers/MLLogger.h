@@ -52,9 +52,8 @@ typedef NS_ENUM(int, MLLogLevel) {
 /**
  *  Sets the level of logging to display.
  *
- *  @discussion By default:
- *  - If running inside an app that was downloaded from iOS App Store, it is set to `MLLogLevelNone`.
- *  - All other cases, it is set to `MLLogLevelWarning`.
+ *  @discussion 
+ *  - By default, it is set to `MLLogLevelWarning`.
  *  - When `+[MLLogger setLogLevel:]` get called, it will attempt to call this method on current logger.
  *
  *  @param level Log level to set
@@ -102,9 +101,8 @@ typedef NS_ENUM(int, MLLogLevel) {
 /**
  *  Log level that will be displayed.
  *
- *  @discussion By default:
- *  - If running inside an app that was downloaded from iOS App Store, it is set to `MLLogLevelNone`.
- *  - All other cases, it is set to `MLLogLevelWarning`.
+ *  @discussion
+ *  - By default, it is set to `MLLogLevelWarning`.
  *
  *  @return The current log level.
  */
@@ -113,9 +111,8 @@ typedef NS_ENUM(int, MLLogLevel) {
 /**
  *  Sets the level of logging to display.
  *
- *  @discussion By default:
- *  - If running inside an app that was downloaded from iOS App Store, it is set to `MLLogLevelNone`.
- *  - All other cases, it is set to `MLLogLevelWarning`.
+ *  @discussion
+ *  - By default, it is set to `MLLogLevelWarning`.
  *
  *  @param level Log level to set
  */

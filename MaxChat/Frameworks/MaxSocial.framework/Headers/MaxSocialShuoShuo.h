@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) NSString *text;
 @property (nonatomic, strong, readonly) NSURL *url;
 
-// 图片链接需要 NSInputStream 支持的
+// Urls should be file urls.
 @property (nonatomic, strong, readonly) NSArray<NSURL*> *imageURLs;
 
 + (instancetype)contentWithText:(NSString *)text;
@@ -39,9 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *userId;
 
 // location
-@property (nonatomic, strong) MaxSocialLocation *location;
+@property (nonatomic, strong, nullable) MaxSocialLocation *location;
 
 @property (nonatomic, strong) MaxSocialShuoShuoContent *content;
+
+@property (nonatomic, strong, nullable) NSString *share;
 
 + (instancetype)statusFromDictionary:(NSDictionary *)dictionary;
 

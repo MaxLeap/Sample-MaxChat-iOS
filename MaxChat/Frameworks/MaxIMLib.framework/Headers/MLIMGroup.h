@@ -3,8 +3,8 @@
 //  MaxLeapIM
 //
 
-#import <MaxIMLib/MLIMConstants.h>
-#import <MaxIMLib/MLIMRuntimeObject.h>
+#import "MLIMConstants.h"
+#import "MLIMRuntimeObject.h"
 
 @class MLIMMessage;
 
@@ -39,6 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly) NSArray<NSString *> *members;
 
+/**
+ *  The custom attributes
+ */
 @property (nullable, nonatomic, strong) NSDictionary *attributes;
 
 /**
@@ -118,6 +121,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)changeOwner:(NSString *)newOwner block:(MLIMBooleanResultBlock)block;
 
 /**
+ *  Add one member to the group.
+ *
+ *  @param mem   Id of the new member
+ *  @param block A block to be executed after member add completion.
+ */
+- (void)addAMember:(NSString *)mem block:(void(^)(BOOL, NSError*__Nullable))block;
+
+/**
  *  Add members to the group.
  *
  *  @param newMembers The new members to add.
@@ -126,12 +137,28 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addMembers:(NSArray *)newMembers block:(MLIMBooleanResultBlock)block;
 
 /**
+ *  Remove a member from the group.
+ *
+ *  @param mem   Id of the member to remove.
+ *  @param block A block to be executed after member remove completion.
+ */
+- (void)removeAMember:(NSString *)mem block:(void(^)(BOOL, NSError*__Nullable))block;
+
+/**
  *  Remove members from the group. The group owner cannot be removed.
  *
  *  @param members The members to remove.
  *  @param block   A block to be executed after member remove completion.
  */
 - (void)removeMembers:(NSArray *)members block:(MLIMBooleanResultBlock)block;
+
+/**
+ *  Replace all group members except the owner with newMembers.
+ *
+ *  @param newMembers New members for the group.
+ *  @param block      A block to be executed after member replace completion.
+ */
+- (void)overwriteMembers:(NSArray *)newMembers block:(MLIMBooleanResultBlock)block;
 
 /**
  *  @name Delete Groups

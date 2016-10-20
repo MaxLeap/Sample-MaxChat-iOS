@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger, MLNetworkStatus) {
 @property (readonly, nonatomic, strong) NSString *model;
 @property (readonly, nonatomic) MLDeviceFamily family;
 
+@property (readonly, nonatomic)         CGSize mainScreenSize;
 @property (readonly, nonatomic, strong) NSString *mainScreenResolution;
 
 @property (readonly, nonatomic) long long totalDiskSpace;

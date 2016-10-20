@@ -10,7 +10,7 @@
 ///--------------------------------------
 
 // MaxLeap SDK Version
-#define MaxLeap_VERSION @"2.0.10"
+#define MaxLeap_VERSION @"2.1.3"
 
 ///--------------------------------------
 /// @name MaxLeap Sites

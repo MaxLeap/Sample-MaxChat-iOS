@@ -4,8 +4,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MaxIMLib/MLIMConstants.h>
-#import <MaxIMLib/MLIMRuntimeObject.h>
+#import "MLIMConstants.h"
+#import "MLIMRuntimeObject.h"
 
 @class MLIMMessage;
 

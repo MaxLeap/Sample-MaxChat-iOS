@@ -23,6 +23,11 @@
 @property (nonatomic) BOOL read;
 @property (nonatomic) BOOL isLike;
 
+@property (nonatomic) BOOL friendCircle;
+
+@property (nonatomic, strong) NSString *toUserId;
+@property (nonatomic, strong) NSString *hostUserId;
+
 + (instancetype)commentFromDictionary:(NSDictionary *)dictionary;
 
 @end

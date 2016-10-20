@@ -19,6 +19,7 @@
 @implementation MCTimelinePostCommentCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     // Initialization code
     self.bgView.backgroundColor = UIColorFromRGB(0xEEEEEC);
     

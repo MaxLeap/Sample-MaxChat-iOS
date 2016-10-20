@@ -22,6 +22,7 @@
 @implementation MCTimelinePostLikesCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.bgView.backgroundColor = UIColorFromRGB(0xEEEEEC);
     self.likeIconImageView.image = ImageNamed(@"ic_share_ blue");
     

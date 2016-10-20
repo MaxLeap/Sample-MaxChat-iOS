@@ -183,8 +183,8 @@
 - (void)requestDataFromPage:(NSUInteger)page completion:(void(^)(NSArray *shuoshuos, BOOL didReachEnd, NSError *error))completion {
     
     MaxSocialQuery *query = [MaxSocialQuery new]; // default query
-    query.page = page;
-    query.limit = 10;
+    query.page = (int)page;
+//    query.limit = 10;
     
     MLDictionaryResultBlock block = ^(NSDictionary * _Nullable result, NSError * _Nullable error) {
         NSDictionary *likes = result[@"zans"];
@@ -296,21 +296,30 @@
 
 #pragma mark- Action
 - (IBAction)submitCommentButtonPressed:(id)sender {
+    if (! self.commentTextView.text) {
+        return;
+    }
     [SVProgressHUD showWithStatus:@"请稍候"];
     MaxSocialRemoteShuoShuo *currentPost = self.shuoshuos[self.selectedIndexPath.section];
     [MLAnalytics trackEvent:@"发布评论"];
-    [MaxSocialCurrentUser createCommentForShuoShuo:currentPost.objectId
-                                       withContent:self.commentTextView.text
-                                             block:^(MaxSocialComment * _Nullable comment, NSError * _Nullable error) {
-                                                 [currentPost.comments insertObject:comment atIndex:0];
-                                                 [self hideCommentToolBarView];
-                                                 if (error) {
-                                                     [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-                                                 } else {
-                                                     [SVProgressHUD showSuccessWithStatus:@"评论成功!"];
-                                                     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:self.selectedIndexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-                                                 }
-                                             }];
+    NSDictionary *shuo = @{@"userId": MaxSocialCurrentUser.userId,
+                           @"shuoId": currentPost.objectId,
+                           @"content": self.commentTextView.text,
+                           @"zan": @NO,                           // if true, the content must not be set!
+                           @"friendCircle": @NO,
+                           @"toUserId": currentPost.userId,
+                           @"hostUserId": currentPost.userId
+                           };
+    [MaxSocialCurrentUser createOrUpdateComment:shuo block:^(MaxSocialComment * _Nullable comment, NSError * _Nullable error) {
+        [currentPost.comments insertObject:comment atIndex:0];
+        [self hideCommentToolBarView];
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        } else {
+            [SVProgressHUD showSuccessWithStatus:@"评论成功!"];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:self.selectedIndexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }];
 }
 
 
@@ -422,18 +431,24 @@
                                                     }];
             } else {
                 [MLAnalytics trackEvent:@"赞"];
-                [MaxSocialCurrentUser likeShuoShuo:currentPost.objectId
-                                             block:^(MaxSocialComment * _Nullable comment, NSError * _Nullable error) {
-                                                 // comment.isLike 应该为 YES.
-                                                 // 可以通过评论对象 comment 的 isLike 属性判断该评论是点赞还是文字评论
-                                                 
-                                                 if (comment.isLike && !error) {
-                                                     [currentPost.zans insertObject:comment atIndex:0];
-                                                     [wSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-                                                 } else {
-                                                     [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-                                                 }
-                                             }];
+                NSDictionary *params = @{@"userId": MaxSocialCurrentUser.userId,
+                                         @"shuoId": currentPost.objectId,
+                                         @"zan": @YES,
+                                         @"friendCircle": @NO,
+                                         @"toUserId": currentPost.userId,
+                                         @"hostUserId": currentPost.userId
+                                         };
+                [MaxSocialCurrentUser createOrUpdateComment:params block:^(MaxSocialComment * _Nullable comment, NSError * _Nullable error) {
+                    // comment.isLike 应该为 YES.
+                    // 可以通过评论对象 comment 的 isLike 属性判断该评论是点赞还是文字评论
+                    
+                    if (comment.isLike && !error) {
+                        [currentPost.zans insertObject:comment atIndex:0];
+                        [wSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    } else {
+                        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+                    }
+                }];
             }
         };
         

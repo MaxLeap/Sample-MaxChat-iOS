@@ -13,9 +13,9 @@
 @import MaxLeap;
 
 
-@implementation MLIMFriendInfo(isEqual)
+@implementation MLIMRelationInfo(isEqual)
 - (BOOL)isEqual:(id)obj {
-    if ([obj isKindOfClass:[MLIMFriendInfo class]]) {
+    if ([obj isKindOfClass:[MLIMRelationInfo class]]) {
         return [self.uid isEqualToString:[obj uid]];
     } else {
         return NO;
@@ -68,7 +68,7 @@
         configuration.autoReconnect = YES;
         configuration.reconnectAttempts = 3; // 重连次数
         configuration.reconnectWait = 3; // 断线后重连等待时间
-        
+        configuration.baseURL = [NSURL URLWithString:@"http://im.maxleap.cn"];
         // 可选配置，如果不配置 installationId，将不会收到离线消息推送
         configuration.installationId = [MLInstallation currentInstallation].installationId;
         self.client = [MLIMClient clientWithConfiguration:configuration];
@@ -159,7 +159,7 @@
 }
 
 
-- (void)pushMessagesControllerForFriend:(MLIMFriendInfo *)aFriend withNavigator:(UINavigationController *)navigator {
+- (void)pushMessagesControllerForFriend:(MLIMRelationInfo *)aFriend withNavigator:(UINavigationController *)navigator {
     self.currentMessagesReceiver = aFriend;
     self.currentMessagesData = [[MCMessagesModelData alloc] initWithFriend:aFriend];
     
@@ -238,11 +238,11 @@
  *  @param message The message received.
  *  @param aFriend The message sender.
  */
-- (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromFriend:(MLIMFriendInfo *)aFriend {
+- (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromFriend:(MLIMRelationInfo *)aFriend {
     [self updateRecentChats:aFriend];
     
-    if ([self.currentMessagesReceiver isKindOfClass:[MLIMFriendInfo class]]) {
-        MLIMFriendInfo *currentFriend = (MLIMFriendInfo *)self.currentMessagesReceiver;
+    if ([self.currentMessagesReceiver isKindOfClass:[MLIMRelationInfo class]]) {
+        MLIMRelationInfo *currentFriend = (MLIMRelationInfo *)self.currentMessagesReceiver;
         if ([currentFriend.uid isEqualToString:aFriend.uid]) {
             [self.currentMessagesData receiveMessage:message];
             [self.currentMessagesViewController finishReceivingMessageAnimated:YES];
@@ -296,7 +296,7 @@
  *  @param client  The client
  *  @param aFriend The friend online.
  */
-- (void)client:(MLIMClient *)client friendDidOnline:(MLIMFriendInfo *)aFriend {
+- (void)client:(MLIMClient *)client friendDidOnline:(MLIMRelationInfo *)aFriend {
     NSLog(@"friendDidOnline %@", aFriend);
 }
 
@@ -306,7 +306,7 @@
  *  @param client  The client
  *  @param aFriend The friend offline.
  */
-- (void)client:(MLIMClient *)client friendDidOffline:(MLIMFriendInfo *)aFriend {
+- (void)client:(MLIMClient *)client friendDidOffline:(MLIMRelationInfo *)aFriend {
     NSLog(@"friendDidOffline %@", aFriend);
 }
 

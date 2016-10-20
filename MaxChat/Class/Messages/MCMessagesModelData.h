@@ -20,7 +20,7 @@
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
 
 - (id)init NS_UNAVAILABLE;
-- (id)initWithFriend:(MLIMFriendInfo*)aFriend;
+- (id)initWithFriend:(MLIMRelationInfo*)aFriend;
 - (id)initWithGroup:(MLIMGroup*)aGroup;
 
 - (void)sendMessage:(JSQMessage *)message;

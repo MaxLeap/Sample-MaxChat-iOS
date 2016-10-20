@@ -70,7 +70,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     id chat = [MaxChatIMClient sharedInstance].recentChats[indexPath.row];
-    if ([chat isKindOfClass:[MLIMFriendInfo class]]) {
+    if ([chat isKindOfClass:[MLIMRelationInfo class]]) {
         [[MaxChatIMClient sharedInstance]pushMessagesControllerForFriend:chat withNavigator:self.navigationController];
     } else {
         [[MaxChatIMClient sharedInstance]pushMessagesControllerForGroup:chat withNavigator:self.navigationController];
@@ -80,7 +80,7 @@
 @end
 
 @interface MCChatCell()
-@property (nonatomic, strong) MLIMFriendInfo *theFriend;
+@property (nonatomic, strong) MLIMRelationInfo *theFriend;
 @property (nonatomic, strong) MLIMGroup *theGroup;
 
 @end
@@ -88,7 +88,7 @@
 @implementation MCChatCell
 
 - (void)configWithChat:(id)chat {
-    if ([chat isKindOfClass:[MLIMFriendInfo class]]) {
+    if ([chat isKindOfClass:[MLIMRelationInfo class]]) {
         [self configWithFriend:chat];
         self.theGroup = nil;
     } else {
@@ -107,7 +107,7 @@
     }
 }
 
-- (void)configWithFriend:(MLIMFriendInfo *)aFriend {
+- (void)configWithFriend:(MLIMRelationInfo *)aFriend {
     self.theFriend = aFriend;
     self.textLabel.text = aFriend.uid;
     

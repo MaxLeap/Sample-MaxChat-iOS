@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @abstract The name of the class of the target child objects.
  */
-@property (readonly, nonatomic, strong, nullable) NSString *targetClass;
+@property (nonatomic, strong, nullable) NSString *targetClass;
 
 
 ///--------------------------------------

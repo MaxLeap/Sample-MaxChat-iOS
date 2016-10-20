@@ -18,6 +18,7 @@
 #import "WXApi.h"
 #import "MaxChatIMClient.h"
 #import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/TencentApiInterface.h>
 #import "UIImage+Additions.h"
 
 @import MLWeChatUtils;

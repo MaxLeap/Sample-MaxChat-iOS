@@ -3,8 +3,8 @@
 //  MaxLeapIM
 //
 
-#import <MaxIMLib/MLIMConstants.h>
-#import <MaxIMLib/MLIMRuntimeObject.h>
+#import "MLIMConstants.h"
+#import "MLIMRuntimeObject.h"
 
 @class MLIMMessage;
 
@@ -35,6 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly) NSTimeInterval createTs;
 
+/**
+ *  The custom attributes
+ */
 @property (nullable, nonatomic, strong) NSDictionary<NSString *, id> *attributes;
 
 /**
@@ -67,14 +70,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchWithBlock:(nullable MLIMBooleanResultBlock)block;
 
 /**
- *  Update name of the room.
- *
- *  @param name  The new room name.
- *  @param block A block to be execute after operation complete.
- */
-- (void)updateName:(NSString *)name block:(MLIMBooleanResultBlock)block;
-
-/**
  *  Add members to the room.
  *
  *  @param newMembers The new member userIds to join in the room.
@@ -83,12 +78,36 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addMembers:(NSArray<NSString*> *)newMembers block:(MLIMBooleanResultBlock)block;
 
 /**
+ *  Add one member to the room.
+ *
+ *  @param memId Id of the new member.
+ *  @param block A block to be executed after member add completion.
+ */
+- (void)addAMember:(NSString *)memId block:(MLIMBooleanResultBlock)block;
+
+/**
  *  Remove members from the room.
  *
  *  @param members The member userIds to remove.
  *  @param block   A block to be executed after operation complete
  */
 - (void)removeMembers:(NSArray<NSString*> *)members block:(MLIMBooleanResultBlock)block;
+
+/**
+ *  Remove a member from the room.
+ *
+ *  @param memId id of the member to remove
+ *  @param block A block to be executed after member remove completion.
+ */
+- (void)removeAMember:(NSString *)memId block:(MLIMBooleanResultBlock)block;
+
+/**
+ *  Replace all group members with newMembers.
+ *
+ *  @param newMembers New members for the room.
+ *  @param block      A block to be executed after member replace completion.
+ */
+- (void)overwriteMembers:(NSArray *)newMembers block:(MLIMBooleanResultBlock)block;
 
 /**
  *  Delete the room.
@@ -108,6 +127,14 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param block A block to return the result.
  */
 - (void)updateAttributes:(NSDictionary<NSString *, id> *)attrs completion:(void(^)(BOOL success, NSError *_Nullable error))block;
+
+/**
+ *  Update name of the room.
+ *
+ *  @param name  The new room name.
+ *  @param block A block to be execute after operation complete.
+ */
+- (void)updateName:(NSString *)name block:(MLIMBooleanResultBlock)block;
 
 /**
  *  Replace whole attributes with the new one. The attributes keys must be a string, the values can be any json serializable type.

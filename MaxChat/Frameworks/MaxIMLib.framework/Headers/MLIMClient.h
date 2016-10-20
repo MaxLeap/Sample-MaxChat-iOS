@@ -3,10 +3,11 @@
 //  MaxLeapIM
 //
 
-#import <MaxIMLib/MLIMConstants.h>
+#import "MLIMConstants.h"
+#import "MLIMRuntimeObject.h"
 
 @class MLIMUser,
-MLIMFriendInfo,
+MLIMRelationInfo,
 MLIMGroup,
 MLIMRoom,
 MLIMPassenger,
@@ -34,14 +35,17 @@ typedef NS_ENUM(int, MLIMClientStatus) {
     MLIMClientStatusClosed
 };
 
+#pragma mark -
+#pragma mark MLIMClient
+
 /**
  *  A client representation of a user connection.
  */
 @interface MLIMClient : NSObject
 
-/**
- *  @name Properties
- */
+///--------------------------------------
+/// @name Properties
+///--------------------------------------
 
 /**
  *  The client status
@@ -63,9 +67,9 @@ typedef NS_ENUM(int, MLIMClientStatus) {
  */
 @property (nullable, nonatomic, readonly) MLIMPassenger *currentPassenger;
 
-/**
- *  @name Creating Clients
- */
+///--------------------------------------
+/// @name Creating IM client
+///--------------------------------------
 
 /**
  *  Creates an `MLIMClient` object using the config.
@@ -89,9 +93,9 @@ typedef NS_ENUM(int, MLIMClientStatus) {
  */
 + (instancetype)clientWithAppId:(NSString *)appId clientKey:(NSString *)clientKey installationId:(nullable NSString *)installationId;
 
-/**
- *  @name Login/Logout
- */
+///--------------------------------------
+/// @name Login/Logout
+///--------------------------------------
 
 /**
  *  Login or signup with a user id, without password.
@@ -145,13 +149,25 @@ typedef NS_ENUM(int, MLIMClientStatus) {
 - (void)loginPassenger:(MLIMPassenger *)passenger completion:(MLIMBooleanResultBlock)block;
 
 /**
- *  Disconnect the connection and logout.
+ *  Delete config.installId from current user and then disconnect the connection.
  *
  *  @note After logout, this device cannot receive any furture messages send to the user, include offline push notifications.
  *
  *  @param block The block to execute after login completion. The block should have the following argument signature: (BOOL succeeded, NSError *error)
  */
 - (void)logoutWithCompletion:(MLIMBooleanResultBlock)block;
+
+
+/**
+ Delete config.installId from current user to prevent the user receiving offline push notifications.
+
+ @param block The block to execute after request completion. It should have the following argument signature: (BOOL succeeded, NSError *error)
+ */
+- (void)deleteInstallIdCompletion:(MLIMBooleanResultBlock)block;
+
+///--------------------------------------
+/// @name Pause/Resume
+///--------------------------------------
 
 /**
  *  Disconnect the connection, do not logout. User will be offline and receive offline push notifications.
@@ -163,9 +179,9 @@ typedef NS_ENUM(int, MLIMClientStatus) {
  */
 - (void)resume;
 
-/**
- *  @name Sending Messages
- */
+///--------------------------------------
+/// @name Sending instant messages
+///--------------------------------------
 
 /**
  *  Send messages.
@@ -181,7 +197,7 @@ typedef NS_ENUM(int, MLIMClientStatus) {
  *  Send message
  *
  *  @param message  The message to send, should specify a receiver.
- *  @param progress The progress block to notify attachment upload progress. The block should have the following argument signature: (int percentDone)
+ *  @param progress A block to notify attachment uploading progress. The block should have the following argument signature: (int percentDone)
  *  @param block    The block to execute after message sending. The block should have the following argument signature: (BOOL succeeded, NSError *error)
  */
 - (void)sendMessage:(MLIMMessage *)message progress:(nullable MLIMProgressBlock)progress completion:(nullable MLIMBooleanResultBlock)block;
@@ -189,16 +205,25 @@ typedef NS_ENUM(int, MLIMClientStatus) {
 /**
  *  Send message to friend.
  *
- *  @param message The message to send, message.receiver will be mutated.
+ *  @param message The message to send, `message.receiver` will be mutated.
  *  @param uid     Friend's userId.
  *  @param block   Block to execute after message send completion. The block should have the following argument signature: (BOOL succeeded, NSError *error)
  */
 - (void)sendMessage:(MLIMMessage *)message toFriend:(NSString *)uid completion:(MLIMBooleanResultBlock)block;
 
 /**
+ *  Send message to a stranger.
+ *
+ *  @param message The message to send, `message.receiver` will be mutated.
+ *  @param uid     The stranger's userId.
+ *  @param block   Block to execute after message send completion. The block should have the following argument signature: (BOOL succeeded, NSError *error)
+ */
+- (void)sendMessage:(MLIMMessage *)message toStranger:(NSString *)uid completion:(MLIMBooleanResultBlock)block;
+
+/**
  *  Send message to group.
  *
- *  @param message The message to send, message.receiver will be mutated
+ *  @param message The message to send, `message.receiver` will be mutated
  *  @param gid     The target group Id.
  *  @param block   The block should have the following signature: (BOOL succeeded, NSError *error)
  */
@@ -207,16 +232,31 @@ typedef NS_ENUM(int, MLIMClientStatus) {
 /**
  *  Send message to room.
  *
- *  @param message The message to send. message.receiver will be mutated
+ *  @param message The message to send. `message.receiver` will be mutated
  *  @param rid     The target roomId.
  *  @param block   The block should have the following signature: (BOOL succeeded, NSError *error)
  */
 - (void)sendMessage:(MLIMMessage *)message toRoom:(NSString *)rid completion:(MLIMBooleanResultBlock)block;
 
-/**
- *  @name Sending System Messages
- */
+///--------------------------------------
+/// @name Sending System Messages
+///--------------------------------------
 
+/**
+ *  Sending a system message via restful api, but the message will be received via socket.
+ *
+ *  @param message A system message
+ *  @param block   The block should have the following signature: (BOOL succeded, NSError *error)
+ */
+- (void)sendSystemMessage:(MLIMMessage *)message completion:(nullable MLIMBooleanResultBlock)block;
+
+/**
+ *  Sending a system message via restful api, but the message will be received via socket.
+ *
+ *  @param progress A block to notify attachment uploading progress. The block should have the following argument signature: (int percentDone)
+ *  @param message  A system message
+ *  @param block    The block should have the following signature: (BOOL succeded, NSError *error)
+ */
 - (void)sendSystemMessage:(MLIMMessage *)message progress:(nullable MLIMProgressBlock)progress completion:(nullable MLIMBooleanResultBlock)block;
 
 /**
@@ -256,12 +296,26 @@ typedef NS_ENUM(int, MLIMClientStatus) {
 
 @end
 
+#pragma mark -
+#pragma mark MLIMClientDelegate
+
 /**
  *  The methods decleared by `MLIMClientDelegate` protocol allows you handle client status change events, messages, and friend status change events.
  */
 @protocol MLIMClientDelegate <NSObject>
 
 @optional
+
+///--------------------------------------
+/// @name Connection Status Changes
+///--------------------------------------
+
+/**
+ *  Called when user login success.
+ *
+ *  @param client The client object that login success.
+ */
+- (void)clientDidLogin:(MLIMClient *)client;
 
 /**
  *  Called when connection broken.
@@ -278,18 +332,15 @@ typedef NS_ENUM(int, MLIMClientStatus) {
 - (void)clientAttemptReconnect:(MLIMClient *)client;
 
 /**
- *  Called when user login success.
- *
- *  @param client The client object that login success.
- */
-- (void)clientDidLogin:(MLIMClient *)client;
-
-/**
  *  Called when user logout.
  *
  *  @param client The client object that logout.
  */
 - (void)clientDidLogout:(MLIMClient *)client;
+
+///--------------------------------------
+/// @name Receiving Messages
+///--------------------------------------
 
 /**
  *  Called when receive a message from friend or message send to friend by your other clients.
@@ -298,7 +349,16 @@ typedef NS_ENUM(int, MLIMClientStatus) {
  *  @param message The message received.
  *  @param aFriend The message sender.
  */
-- (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromFriend:(MLIMFriendInfo *)aFriend;
+- (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromFriend:(MLIMRelationInfo *)aFriend;
+
+/**
+ *  Called when receive a message from room or message send to room by your other clients.
+ *
+ *  @param client   The client which received message.
+ *  @param message  The message received.
+ *  @param stranger The message sender.
+ */
+- (void)client:(MLIMClient *)client didReceiveMessage:(MLIMMessage *)message fromStranger:(MLIMRelationInfo *)stranger;
 
 /**
  *  Called when receive a message from group or message send to group by your other clients.
@@ -326,13 +386,17 @@ typedef NS_ENUM(int, MLIMClientStatus) {
  */
 - (void)client:(MLIMClient *)client didReceiveSystemMessage:(MLIMMessage *)message;
 
+///--------------------------------------
+/// @name Friend Online Status Changes
+///--------------------------------------
+
 /**
  *  Called when a friend online.
  *
  *  @param client  The client
  *  @param aFriend The friend online.
  */
-- (void)client:(MLIMClient *)client friendDidOnline:(MLIMFriendInfo *)aFriend;
+- (void)client:(MLIMClient *)client friendDidOnline:(MLIMRelationInfo *)aFriend;
 
 /**
  *  Called when a friend offline
@@ -340,15 +404,39 @@ typedef NS_ENUM(int, MLIMClientStatus) {
  *  @param client  The client
  *  @param aFriend The friend offline.
  */
-- (void)client:(MLIMClient *)client friendDidOffline:(MLIMFriendInfo *)aFriend;
+- (void)client:(MLIMClient *)client friendDidOffline:(MLIMRelationInfo *)aFriend;
+
+/**
+ *  Notify a stranger online event.
+ *
+ *  @param client  the client
+ *  @param someone the stranger
+ */
+- (void)client:(MLIMClient *)client someoneDidOnline:(MLIMRelationInfo *)someone;
+
+/**
+ *  Notify a stranger offline evnt
+ *
+ *  @param client  the client
+ *  @param someone the stranger
+ */
+- (void)client:(MLIMClient *)client someoneDidOffline:(MLIMRelationInfo *)someone;
 
 @end
 
 
+#pragma mark -
+#pragma mark MLIMClientConfiguration
+
 /**
  *  Configuration options for a MLIMClient. You should not modify a configuration after a MLIMClient is created.
  */
-@interface MLIMClientConfiguration : NSObject
+@interface MLIMClientConfiguration : MLIMRuntimeObject
+
+/**
+ *  The base url.
+ */
+@property (nonatomic, strong) NSURL *baseURL;
 
 /**
  *  (Required) The MaxLeap app's applicationId.
@@ -367,35 +455,41 @@ typedef NS_ENUM(int, MLIMClientStatus) {
 @property (nullable, nonatomic, strong) NSString *installationId;
 
 /**
- *  If set `YES`, will print socket.io log.
+ *  If `YES` socket will log debug messages. Default is `NO`.
  */
 @property (nonatomic) BOOL shouldLog;
 
 /**
- *  Should automatically reconnect or not. Default is `YES`.
+ *  Whether to auto-reconnect on server lose. Default is `YES`.
  */
 @property (nonatomic) BOOL autoReconnect;
 
 /**
- *  The number of auto-reconnect attempts. Default is un-limited.
+ *  How many times to auto-reconnect. Default is `-1` (infinite tries).
  */
 @property (nonatomic) NSInteger reconnectAttempts;
 
 /**
- *  The delay before reconnecting. Default is 0.
+ *  Amount of time to wait between auto-reconnects, in seconds. Default is `10s`.
  */
 @property (nonatomic) NSInteger reconnectWait;
 
 /**
+ *  Only use this option if you're using the client with VoIP services. 
+ *  Changes the way the WebSocket is created. Default is `NO`.
+ */
+@property (nonatomic) BOOL voipEnabled;
+
+/**
  *  Creates a default configuration.
- *
  *  @return A new configuration.
  */
 + (instancetype)defaultConfiguration;
 
 @end
 
-
+#pragma mark -
+#pragma mark Notification Definitions
 
 /**
  *  Post when user login. The user object can be retrieved from `notification.userInfo[@"user"]`.
@@ -418,14 +512,24 @@ FOUNDATION_EXPORT NSString * const MLIMClientDidReceiveMessageNotification;
 FOUNDATION_EXPORT NSString * const MLIMClientDidReceiveSystemMessageNotification;
 
 /**
- *  Post when friend online. The friend id can be retrieved from `notification.userInfo[@"id"]`
+ *  Post when a friend is online. The friend id can be retrieved from `notification.userInfo[@"id"]`
  */
 FOUNDATION_EXPORT NSString * const MLIMFriendOnlineNotification;
 
 /**
- *  Post when friend offline. The friend id can be retrieved from `notification.userInfo[@"id"]`
+ *  Post when a friend is offline. The friend id can be retrieved from `notification.userInfo[@"id"]`
  */
 FOUNDATION_EXPORT NSString * const MLIMFriendOfflineNotification;
+
+/**
+ *  Post when a stranger is online. The stranger id can be retrieved from `notification.userInfo[@"id"]`
+ */
+FOUNDATION_EXPORT NSString * const MLIMSomeoneOnlineNotification;
+
+/**
+ *  Post when a stranger is offline. The stranger id can be retrieved from `notification.userInfo[@"id"]`
+ */
+FOUNDATION_EXPORT NSString * const MLIMSomeoneOfflineNotification;
 
 NS_ASSUME_NONNULL_END
 

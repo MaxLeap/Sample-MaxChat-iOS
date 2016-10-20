@@ -22,7 +22,9 @@ typedef void (^MLSShuoShuoResultBlock)(MaxSocialShuoShuo *_Nullable status, NSEr
 typedef void (^MLSCommentResultBlock)(MaxSocialComment *_Nullable comment, NSError *_Nullable error);
 typedef void (^MLSLocationResultBlock)(MaxSocialLocationInfo *_Nullable location, NSError *_Nullable error);
 
-
+/**
+ *  A `MaxSocialUser` represents a user persisted to the MaxSocial.
+ */
 @interface MaxSocialUser : NSObject
 
 ///--------------------------------------
@@ -332,8 +334,9 @@ typedef void (^MLSLocationResultBlock)(MaxSocialLocationInfo *_Nullable location
  *  }
  *  @endcode
  *
- *  @param query The query object.
- *  @param block A block to return the result. The block should have the following signatures: (NSDictionary *result, NSError *error)
+ *  @param location The reference location
+ *  @param distance Max distance
+ *  @param block    A block to return the result. The block should have the following signatures: (NSDictionary *result, NSError *error)
  */
 - (void)getShuoShuoNearLocation:(MaxSocialLocation *)location distance:(int64_t)distance block:(MLDictionaryResultBlock)block;
 
@@ -373,7 +376,7 @@ typedef void (^MLSLocationResultBlock)(MaxSocialLocationInfo *_Nullable location
  */
 - (void)deleteShuoShuoWithId:(NSString *)shuoId block:(void(^)(BOOL shuoDelete, BOOL photosDelete, NSError *_Nullable error))block;
 
-#pragma mark - Relation
+#pragma mark - Location
 ///--------------------------------------
 /// @name Location
 ///--------------------------------------
@@ -418,10 +421,86 @@ typedef void (^MLSLocationResultBlock)(MaxSocialLocationInfo *_Nullable location
  */
 - (void)deleteLocationInfoWithObjectId:(NSString *)objectId block:(MLBooleanResultBlock)block;
 
-#pragma mark - Relation
+#pragma mark - Comment
 ///--------------------------------------
 /// @name Comment
 ///--------------------------------------
+
+/**
+ *  Create a comment for a shuoshuo.
+ *
+ *  The valid params structure is: 
+ *  @code
+ *  {
+ *      "objectId": "8941b1863330920045fea193", // if objectId is set, excute update operation
+ *      "userId": "5641b10b3330920001f1f7a4",
+ *      "shuoId": "570613bf6b85b3436e86aa43",
+ *      "content": "just test!",
+ *      "zan": false,  // if true, the content MUST NOT be set!
+ *      "read": false,
+ *      "friendCircle": true,
+ *      "toUserId": "5641b10b3330920001f1f7a4",
+ *      "hostUserId": "5641b10b3330920001f1f7a4"
+ *  }
+ *  @endcode
+ *
+ *  CREATE A TEXT COMMEMT:
+ *  @code
+ *  {
+ *      "userId": "5641b10b3330920001f1f7a4",
+ *      "shuoId": "570613bf6b85b3436e86aa43",
+ *      "content": "just test!",
+ *      "zan": false,                           // if true, the content must not be set!
+ *      "friendCircle": true,
+ *      "toUserId": "5641b10b3330920001f1f7a4",
+ *      "hostUserId": "5641b10b3330920001f1f7a4"
+ *  }
+ *  @endcode
+ *
+ *  CREATE A ZAN:
+ *  @code
+ *  {
+ *      "userId": "5641b10b3330920001f1f7a4",
+ *      "shuoId": "570613bf6b85b3436e86aa43",
+ *      "zan": true,
+ *      "friendCircle": true,
+ *      "toUserId": "5641b10b3330920001f1f7a4",
+ *      "hostUserId": "5641b10b3330920001f1f7a4"
+ *  }
+ *  @endcode
+ *
+ *  MARK A COMMENT AS READ:
+ *  @code
+ *  {
+ *      "objectId": "8941b1863330920045fea193",
+ *      "read": false
+ *  }
+ *  @endcode
+ *
+ *  @param params The comment parameters.
+ *  @param block  The result callback. It should have the following signatures: (MaxSocialComment *comment, NSError *error)
+ */
+- (void)createOrUpdateComment:(NSDictionary *)params block:(MLSCommentResultBlock)block;
+
+
+/**
+ *  Batch update comments
+ *
+ *  The valid stucture of params is:
+ *  @code
+ *  [
+ *      {
+ *          "objectId" : comment.objectId,
+ *          "read"     : true
+ *      },
+ *      ...
+ *  ]
+ *  @endcode
+ *
+ *  @param updates The parameters
+ *  @param block   The callback. It should have the following signatures: (BOOL succeeded, NSError *error)
+ */
+- (void)batchUpdateComments:(NSArray<NSDictionary *> *)updates block:(MLBooleanResultBlock)block;
 
 /**
  *  Create a comment for a shuoshuo.
@@ -430,7 +509,7 @@ typedef void (^MLSLocationResultBlock)(MaxSocialLocationInfo *_Nullable location
  *  @param text   The content of the comment.
  *  @param block  The result callback. It should have the following signatures: (MaxSocialComment *comment, NSError *error)
  */
-- (void)createCommentForShuoShuo:(NSString *)shuoId withContent:(NSString *)text block:(MLSCommentResultBlock)block;
+- (void)createCommentForShuoShuo:(NSString *)shuoId withContent:(NSString *)text block:(MLSCommentResultBlock)block __deprecated_msg("Use createOrUpdateComment:block: instead");
 
 /**
  *  Mark a comment as read.
@@ -438,7 +517,7 @@ typedef void (^MLSLocationResultBlock)(MaxSocialLocationInfo *_Nullable location
  *  @param commentId The id of comment.
  *  @param block     The result callback. It should have the following signatures: (BOOL updated, NSError *error)
  */
-- (void)markCommentAsRead:(NSString *)commentId completion:(void(^)(BOOL updated, NSError *_Nullable error))block;
+- (void)markCommentAsRead:(NSString *)commentId completion:(void(^)(BOOL updated, NSError *_Nullable error))block __deprecated_msg("Use createOrUpdateComment:block: instead");
 
 /**
  *  Like a shuoshuo. This operation creates a comment without content.
@@ -446,7 +525,7 @@ typedef void (^MLSLocationResultBlock)(MaxSocialLocationInfo *_Nullable location
  *  @param shuoId The shuoshuoId
  *  @param block  The result callback. It should have the following signatures: (MaxSocialComment *comment, NSError *error)
  */
-- (void)likeShuoShuo:(NSString *)shuoId block:(MLSCommentResultBlock)block;
+- (void)likeShuoShuo:(NSString *)shuoId block:(MLSCommentResultBlock)block __deprecated_msg("Use createOrUpdateComment:block: instead");
 
 /**
  *  Retrieve a comment object with commentId.
@@ -478,7 +557,52 @@ typedef void (^MLSLocationResultBlock)(MaxSocialLocationInfo *_Nullable location
  *
  *  @param block The result block. It should have the following signatures: (NSArray<MaxSocialComment*> *comments, NSError *error)
  */
-- (void)getUnreadCommentWithBlock:(MLArrayResultBlock)block;
+- (void)getUnreadCommentWithBlock:(MLArrayResultBlock)block __deprecated_msg("Use getUnreadCommentWithParams:block: instead");
+
+/**
+ *  Retrieve user's unread comments.
+ *
+ *  @param params The filter parameters, userId(default is self.userId), toUserId, hostUserId
+ *  @param block  The result block. It should have the following signatures: (NSDictionary *results, NSError *error)
+ */
+- (void)getUnreadCommentWithParams:(NSDictionary *)params block:(MLDictionaryResultBlock)block;
+
+#pragma mark - Login
+
+/**
+ *  Register a new user.
+ *
+ *  @param username The new user's username
+ *  @param password The password
+ *  @param block    A block to return the registration result.
+ */
++ (void)registerWithUsername:(NSString *)username password:(NSString *)password completion:(MLIdResultBlock)block;
+
+/**
+ *  Login with username and password.
+ *
+ *  @param username The username
+ *  @param password The password
+ *  @param block    A block to return the login result.
+ */
++ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(MLIdResultBlock)block;
+
+/**
+ *  Request a smscode which can be used to login.
+ *
+ *  @param phoneNumber A phone number
+ *  @param block       A block to return the result: whether the smsCode send successully or not.
+ */
++ (void)requestSmscodeWithPhoneNumber:(NSString *)phoneNumber completion:(MLIdResultBlock)block;
+
+/**
+ *  Login with a phone number and the sms code.
+ *
+ *  @param phoneNumber A phone number
+ *  @param smsCode     The smsCode
+ *  @param block       A block to return the login result.
+ */
++ (void)loginWithPhoneNumber:(NSString *)phoneNumber smsCode:(NSString *)smsCode completion:(MLIdResultBlock)block;
 
 @end
 

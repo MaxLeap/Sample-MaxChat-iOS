@@ -3,8 +3,8 @@
 //  MaxLeapIM
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "MLIMRuntimeObject.h"
 
 typedef NS_ENUM(int, MLIMMessageStatus) {
     /*  */
@@ -38,10 +38,16 @@ typedef NS_ENUM(int, MLIMMessageTargetType) {
     MLIMMessageTargetTypeGroup = 1,
     MLIMMessageTargetTypeRoom = 2,
     MLIMMessageTargetTypePassenger = 3,
-    MLIMMessageTargetTypeSingleUser = MLIMMessageTargetTypePassenger
+    MLIMMessageTargetTypeStranger = 4,
+    
+    MLIMMessageTargetTypeSingleUser __deprecated = MLIMMessageTargetTypePassenger
 };
 
 NS_ASSUME_NONNULL_BEGIN
+
+///--------------------------------------
+/// @name MLIMMessageTarget
+///--------------------------------------
 
 /**
  *  A representation of message sender or receiver.
@@ -49,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MLIMMessageTarget : NSObject
 
 /**
- *  The userId.
+ *  The id of a user, passenger or stranger.
  */
 @property (nonatomic, strong, nullable) NSString *userId;
 
@@ -66,19 +72,23 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  The target passenger's id.
  */
-@property (nonatomic, strong, nullable) NSString *passengerId;
+@property (nonatomic, strong, nullable) NSString *passengerId __deprecated_msg("Access userId instead");
 
 /**
  *  Target Type.
  */
-@property (nonatomic, readonly) MLIMMessageTargetType type;
+@property (nonatomic) MLIMMessageTargetType type;
 
 @end
+
+///--------------------------------------
+/// @name MLIMMessage
+///--------------------------------------
 
 /**
  *  The representation of a message.
  */
-@interface MLIMMessage : NSObject <NSSecureCoding, NSCopying>
+@interface MLIMMessage : MLIMRuntimeObject <NSSecureCoding, NSCopying>
 
 /**
  *  @name Properties
@@ -92,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  The message send timestamp. Seconds since 1970.
  */
-@property (nonatomic, readonly) NSTimeInterval sendTimestamp;
+@property (nonatomic) NSTimeInterval sendTimestamp;
 
 /**
  *  The message sender.
@@ -118,8 +128,50 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Text of text message, `nil` if mediaType != MLIMMediaTypeText.
+ *
+ *  @disscussion MaxLeap recommends that you use the `remark` property to define custom message structure.
  */
 @property (nonatomic, copy, nullable) NSString *text;
+
+/**
+ *  If NO, this message will not trigger a remote push notification.
+ */
+@property (nonatomic) BOOL pushEnable;
+
+/**
+ *  The name of a sound file in the app bundle or in the Library/Sounds folder of the app’s data container.
+ *  See https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html for details.
+ */
+@property (nonatomic, strong) NSString *pushSound;
+
+/**
+ *  The prefix for push notification.
+ */
+@property (nonatomic, copy, nullable) NSString *pushPrefix;
+
+/**
+ *  The suffix for push notification.
+ */
+@property (nonatomic, copy, nullable) NSString *pushSuffix;
+
+/**
+ *  The message body for push notification. If the value of this property doesn't exist, message.text will be used.
+ *
+ *  The final push alert body is: pushPrefix + (pushBodyOverwrite || message.text) + pushSuffix.
+ */
+@property (nonatomic, copy, nullable) NSString *pushBodyOverwrite;
+
+/**
+ *  The `content-available` key in aps. See https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html for details.
+ */
+@property (nonatomic) BOOL pushContentAvailable;
+
+/**
+ *  Some addtional information for the message.
+ *
+ *  @disscussion MaxLeap recommends that you use this property to define custom message structure.
+ */
+@property (nonatomic, copy, nullable) NSString *remark;
 
 /**
  *  The attachment url of non-text message.

@@ -28,15 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSString *)leapClassName;
 
-/// The session token for the MLUser. This is set by the server upon successful authentication.
-@property (nonatomic, strong, nullable) NSString *sessionToken;
-
-/// Whether the MLUserwas just created from a request. This is only set after a Facebook or Twitter login.
-@property (readonly, nonatomic) BOOL isNew;
-
-/// The OAuth data from 3rd party platforms.
-@property (readonly, nonatomic) NSDictionary *oauthData;
-
 /** @name Accessing the Current User */
 
 /*!
@@ -54,33 +45,44 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (instancetype)user;
 
+/** @name Properties */
+
+/// The username for the MLUser.
+@property (nonatomic, strong, nullable) NSString *username;
+
+/// The password for the MLUser. This will not be filled in from the server with the password. It is only meant to be set.
+@property (nonatomic, strong, nullable) NSString *password;
+
+/// The email for the MLUser.
+@property (nonatomic, strong, nullable) NSString *email;
+
+/// Whether the email is verified.
+@property (nonatomic, readonly) BOOL emailVerified;
+
+/// The mobile phone number for the MLUser.
+@property (nonatomic, strong, nullable) NSString *mobilePhone;
+
+/// Whether the mobile phone number is verified. If true, the user can login using mobile phone number and smscode.
+@property (nonatomic, readonly) BOOL mobilePhoneVerified;
+
+/// The session token for the MLUser. This is set by the server upon successful authentication.
+@property (nonatomic, strong, nullable) NSString *sessionToken;
+
+/// Whether the MLUserwas just created from a request. This is only set after a Facebook or Twitter login.
+@property (readonly, nonatomic) BOOL isNew;
+
+/// The OAuth data from 3rd party platforms.
+@property (readonly, nonatomic) NSDictionary *oauthData;
+
+/** @name Authenticated status */
 /*!
- Whether the user is an authenticated object for the device. An authenticated MLUseris one that is obtained via a signUp or logIn method. An authenticated object is required in order to save (with altered values) or delete it.
+ Whether the user is an authenticated object for the device. An authenticated MLUser is one that is obtained via a signUp or logIn method. An authenticated object is required in order to save (with altered values) or delete it.
  
  @return Returns whether the user is authenticated.
  */
 - (BOOL)isAuthenticated;
 
-/**
- *  The username for the MLUser.
- */
-@property (nonatomic, strong, nullable) NSString *username;
-
-/**
- The password for the MLUser. This will not be filled in from the server with the password. It is only meant to be set.
- */
-@property (nonatomic, strong, nullable) NSString *password;
-
-/**
- *  The email for the MLUser.
- */
-@property (nonatomic, strong, nullable) NSString *email;
-
-/**
- *  Whether the email is veriified.
- */
-@property (nonatomic, readonly) BOOL emailVerified;
-
+/** @name Signing up */
 /*!
  Signs up the user asynchronously. Make sure that password and username are set. This will also enforce that the username isn't already taken.
  

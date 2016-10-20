@@ -57,6 +57,19 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setDeviceTokenFromData:(nullable NSData *)deviceTokenData;
 
+/*!
+ Sets the device token string property from an NSData-encoded token.
+ @param deviceTokenData The deviceToken got from `application:didRegisterForRemoteNotificationsWithDeviceToken:` method.
+ @param forSandbox      Whether the remote push notification is under production envrionment.
+ */
+- (void)setDeviceTokenFromData:(nullable NSData *)deviceTokenData forSandbox:(BOOL)forSandbox;
+
+/**
+ *  Whether the remote push notification is under development envrionment.
+ *  Generally, the DEBUG configuration uses development push certificate and the RELEASE configuration uses production push certificate.
+ */
+@property (nonatomic) BOOL sandbox;
+
 /// The device type for the MLInstallation.
 @property (nonatomic, readonly, strong) NSString *deviceType;
 

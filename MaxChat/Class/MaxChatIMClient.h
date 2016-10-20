@@ -15,11 +15,11 @@
 
 @property (nonatomic, strong) MLIMClient *client;
 
-// 最近聊天： MLIMFriendInfo or MLIMGroup
+// 最近聊天： MLIMRelationInfo or MLIMGroup
 @property (nonatomic, strong) NSMutableArray *recentChats;
 
 - (void)loginWithCurrentuserCompletion:(MLIMBooleanResultBlock)completion;
 
-- (void)pushMessagesControllerForFriend:(MLIMFriendInfo *)aFriend withNavigator:(UINavigationController *)navigator;
+- (void)pushMessagesControllerForFriend:(MLIMRelationInfo *)aFriend withNavigator:(UINavigationController *)navigator;
 - (void)pushMessagesControllerForGroup:(MLIMGroup *)aGroup withNavigator:(UINavigationController *)navigator;
 @end
